@@ -12,7 +12,7 @@ random_vectors = np.random.multivariate_normal(mean=[0, 0], cov=[[1, 0], [0, 1]]
 print(random_vectors)
 
 hist_data = []
-bin_count = 10
+bin_count = 20
 
 for i, unit_vector in enumerate(random_vectors):
     projections = X @ unit_vector
@@ -25,7 +25,7 @@ for i, unit_vector in enumerate(random_vectors):
     
     plt.figure()
     plt.hist(projections, bins=bin_count, range=range, edgecolor='black')
-    plt.title(f"Histogram of Projections on Unit Vector {i+1}")
+    plt.title(f"Unit Vector {i+1}")
     plt.show()
     
 def calculate_anomaly_score(sample, hist_data, random_vectors):
@@ -73,4 +73,10 @@ print("Anomalies:\n", anomalies)
 plt.scatter(X[:, 0], X[:, 1], color='blue')
 plt.scatter(anomalies[:, 0], anomalies[:, 1], color='red')
 plt.title("Test data")
+plt.show()
+
+
+scatter = plt.scatter(X[:, 0], X[:, 1], c=anomaly_scores)
+plt.colorbar(scatter, label='Anomaly Score')
+plt.title("Test data colormap")
 plt.show()
