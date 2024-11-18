@@ -20,7 +20,7 @@ y = statlog_shuttle.data.targets
 scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(X)
 
-n_splits = 10
+n_splits = 1
 results = {
     "IForest": {"BA": [], "ROC_AUC": []},
     "DIF": {"BA": [], "ROC_AUC": []},
@@ -30,9 +30,9 @@ results = {
 for _ in range(n_splits):
     X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.4)
 
-    forest_model = IForest(contamination=0.02)
-    dif_model = DIF(contamination=0.02)
-    loda_model = LODA(contamination=0.02)
+    forest_model = IForest(contamination=0.2)
+    dif_model = DIF(contamination=0.2)
+    loda_model = LODA(contamination=0.2)
 
     forest_model.fit(X_train)
     dif_model.fit(X_train)
